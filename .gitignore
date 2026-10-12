@@ -1,3 +1,9 @@
 engine/apito-engine
 console/dist/
 console/console-dist.tar.gz
+
+# Agent notes and local workflows stay off the public tree.
+.cursor/
+.github/workflows/
+.knowledge/
+.memory/
