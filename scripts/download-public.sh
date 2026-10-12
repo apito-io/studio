@@ -1,5 +1,5 @@
 #!/bin/sh
-# Download a tagged public engine binary and a tagged public console build.
+# Download tagged public engine binaries and a tagged public console build.
 # Inputs are GitHub release assets on apito-io/engine and apito-io/console.
 # This script does not read GitLab Udbhabon studio inputs.
 set -eu
@@ -9,9 +9,11 @@ CONSOLE_REF="${CONSOLE_REF:?set CONSOLE_REF to a public console tag}"
 ROOT="$(CDPATH= cd -- "$(dirname "$0")/.." && pwd)"
 
 mkdir -p "$ROOT/engine" "$ROOT/console"
-curl -fL --retry 3 -o "$ROOT/engine/apito-engine" \
-  "https://github.com/apito-io/engine/releases/download/${ENGINE_REF}/apito-engine"
-chmod +x "$ROOT/engine/apito-engine"
+for arch in amd64 arm64; do
+  curl -fL --retry 3 -o "$ROOT/engine/apito-engine-${arch}" \
+    "https://github.com/apito-io/engine/releases/download/${ENGINE_REF}/apito-engine-linux-${arch}"
+  chmod +x "$ROOT/engine/apito-engine-${arch}"
+done
 
 curl -fL --retry 3 -o "$ROOT/console/console-dist.tar.gz" \
   "https://github.com/apito-io/console/releases/download/${CONSOLE_REF}/console-dist.tar.gz"

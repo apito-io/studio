@@ -1,4 +1,5 @@
 engine/apito-engine
+engine/apito-engine-*
 console/dist/
 console/console-dist.tar.gz
 
