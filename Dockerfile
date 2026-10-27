@@ -14,7 +14,7 @@ COPY nginx.conf /etc/nginx/http.d/default.conf
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
-ENV SERVE_PORT=5051
-EXPOSE 5055
+ENV SERVE_PORT=5055
+EXPOSE 4055 5055
 
 ENTRYPOINT ["/docker-entrypoint.sh"]

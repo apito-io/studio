@@ -20,4 +20,8 @@ curl -fL --retry 3 -o "$ROOT/console/console-dist.tar.gz" \
 rm -rf "$ROOT/console/dist"
 mkdir -p "$ROOT/console/dist"
 tar -xzf "$ROOT/console/console-dist.tar.gz" -C "$ROOT/console/dist"
+if grep -R -l -e chatwoot -e "phc_" "$ROOT/console/dist" >/dev/null 2>&1; then
+  echo "public console dist must not ship PostHog or Chatwoot" >&2
+  exit 1
+fi
 echo "downloaded engine ${ENGINE_REF} and console ${CONSOLE_REF}"

@@ -55,4 +55,20 @@ END { print "};" }
 
 cd /opt/apito
 ./engine &
-exec nginx -g 'daemon off;'
+engine_pid=$!
+nginx -g 'daemon off;' &
+nginx_pid=$!
+
+while kill -0 "$engine_pid" 2>/dev/null && kill -0 "$nginx_pid" 2>/dev/null; do
+  sleep 1
+done
+
+if ! kill -0 "$engine_pid" 2>/dev/null; then
+  echo "engine exited" >&2
+  kill "$nginx_pid" 2>/dev/null || true
+  wait "$engine_pid" 2>/dev/null || true
+  exit 1
+fi
+
+kill "$engine_pid" 2>/dev/null || true
+wait "$nginx_pid" 2>/dev/null || exit 1
