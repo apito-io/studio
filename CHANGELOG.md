@@ -1,3 +1,10 @@
+## v0.1.10
+
+- Studio image: ghcr.io/apito-io/studio:v0.1.10
+- Engine tag: v1.9.3
+- Console tag: v0.3.3
+- What changed: baked public engine v1.9.3 and public console v0.3.3 after both release builds finished.
+
 ## v0.1.9
 
 - Studio image: ghcr.io/apito-io/studio:v0.1.9
